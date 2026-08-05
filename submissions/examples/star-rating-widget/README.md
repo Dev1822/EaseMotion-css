@@ -1,14 +1,14 @@
-# ease-rating
+# Interactive CSS-Only Star Rating Widget
 
-A pure-CSS 5-star rating widget for **EaseMotion CSS**. Built on radio inputs with the sibling combinator trick — fully keyboard accessible, zero JavaScript.
+A fully interactive 5-star rating component built entirely with CSS, requiring zero JavaScript. It seamlessly handles hover states, selected states, and animations.
 
-## Usage
+## Features
+- **No JavaScript:** Uses hidden radio buttons, `flex-direction: row-reverse`, and the general sibling selector (`~`) to handle the logic.
+- **Interactive Hover:** Hovering over a star highlights it and all previous stars. Hovering temporarily overrides the selected rating visually.
+- **Animations:** Includes smooth color transitions and a fun `scale` pop animation when a star is selected.
+- **Accessible:** Uses native radio inputs and includes focus-visible outlines for keyboard navigation.
 
-```html
-<div class="rating">
-  <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-  <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-  <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-  <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-  <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-</div>
+## How it works
+1. **The HTML:** We use 5 radio inputs grouped by name, paired with labels. Crucially, they are ordered from 5 down to 1 in the HTML.
+2. **The Magic:** We use `display: flex` and `flex-direction: row-reverse` on the container. This makes the stars visually appear 1 to 5 from left to right, but DOM-wise, 5 is first and 1 is last.
+3. **The Logic:** Because of this reversed DOM order, we can use the `~` general sibling selector to target a hovered/checked star *and all stars with a lower rating* (since they come *after* in the DOM).
