@@ -1,0 +1,160 @@
+/* submissions/examples/css-masonry-grid/style.css */
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0f172a; /* Dark theme background */
+    color: #f8fafc;
+    padding: 3rem 2rem;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Masonry Grid Container */
+.ease-masonry-grid {
+    /* 1 column on mobile (default) */
+    column-count: 1;
+    column-gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Tablet (2 columns) */
+@media (min-width: 768px) {
+    .ease-masonry-grid {
+        column-count: 2;
+    }
+}
+
+/* Desktop (3 columns) */
+@media (min-width: 1024px) {
+    .ease-masonry-grid {
+        column-count: 3;
+    }
+}
+
+/* Large Desktop (4 columns) */
+@media (min-width: 1440px) {
+    .ease-masonry-grid {
+        column-count: 4;
+    }
+}
+
+/* Masonry Item (Card) */
+.ease-masonry-item {
+    break-inside: avoid; /* Prevent items from breaking across columns */
+    page-break-inside: avoid; /* Fallback for older browsers */
+    margin-bottom: 1.5rem; /* Space between rows */
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Premium EaseMotion Hover Effects */
+.ease-masonry-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(129, 140, 248, 0.3);
+    border-color: rgba(129, 140, 248, 0.5);
+    z-index: 10;
+}
+
+/* Image Wrapper for zoom effect */
+.ease-masonry-image-wrapper {
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+}
+
+.ease-masonry-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30, 41, 59, 1) 0%, rgba(30, 41, 59, 0) 100%);
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+
+.ease-masonry-item:hover .ease-masonry-image-wrapper::after {
+    opacity: 0.2;
+}
+
+.ease-masonry-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ease-masonry-item:hover img {
+    transform: scale(1.08) rotate(1deg);
+}
+
+/* Content inside the card */
+.ease-masonry-item-content {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.ease-masonry-item-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #f8fafc;
+    letter-spacing: -0.025em;
+    transition: color 0.3s ease;
+}
+
+.ease-masonry-item:hover .ease-masonry-item-title {
+    color: #a5b4fc;
+}
+
+.ease-masonry-item-desc {
+    font-size: 0.9375rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* Tag/Badge styling */
+.ease-masonry-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    z-index: 2;
+}
