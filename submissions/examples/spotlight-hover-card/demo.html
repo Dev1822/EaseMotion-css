@@ -1,42 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotlight Hover Card</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Radial Spotlight Hover Card — EaseMotion CSS</title>
+    <meta
+      name="description"
+      content="A CSS-only radial spotlight hover effect on dark-themed cards using @property, radial-gradient, and mix-blend-mode."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <p class="page-eyebrow">EaseMotion CSS · Issue #74673</p>
+    <h1 class="page-title">CSS-Only Radial Spotlight</h1>
+    <p class="page-subtitle">
+      Hover over a card to see the spotlight sweep across it — zero JavaScript.
+    </p>
 
-    <div class="container">
-        <h1>CSS Spotlight Hover Card</h1>
-        <p class="subtitle">
-            Hover over the cards to reveal a glowing spotlight effect.
+    <section class="card-grid" aria-label="Spotlight hover card demo">
+      <div class="ease-spotlight-card" id="spotlight-card-1">
+        <div class="card-icon" aria-hidden="true">⚡</div>
+        <h2>Blazing Performance</h2>
+        <p>
+          GPU-composited animations deliver 60 fps effects with no layout
+          thrash — pure CSS does the heavy lifting.
         </p>
+      </div>
 
-        <div class="card-grid">
-            <div class="spotlight-card">
-                <h2>Modern Design</h2>
-                <p>
-                    Create beautiful interfaces with smooth animations and elegant effects.
-                </p>
-            </div>
+      <div class="ease-spotlight-card" id="spotlight-card-2">
+        <div class="card-icon" aria-hidden="true">🎨</div>
+        <h2>Modern Aesthetics</h2>
+        <p>
+          Radial gradients, <code>mix-blend-mode: overlay</code>, and
+          <code>@property</code> combine to create a premium spotlight feel.
+        </p>
+      </div>
 
-            <div class="spotlight-card">
-                <h2>Pure CSS</h2>
-                <p>
-                    Built entirely with CSS gradients, transitions, and transforms.
-                </p>
-            </div>
-
-            <div class="spotlight-card">
-                <h2>Responsive</h2>
-                <p>
-                    Works seamlessly across desktop, tablet, and mobile devices.
-                </p>
-            </div>
-        </div>
-    </div>
-
-</body>
+      <div class="ease-spotlight-card" id="spotlight-card-3">
+        <div class="card-icon" aria-hidden="true">🔒</div>
+        <h2>Zero Dependencies</h2>
+        <p>
+          No JavaScript, no libraries. A single CSS file is all you need to
+          ship this flagship interaction.
+        </p>
+      </div>
+    </section>
+  </body>
 </html>

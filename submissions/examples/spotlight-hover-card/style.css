@@ -1,98 +1,262 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   CSS-Only Radial Spotlight Hover Effect  —  EaseMotion CSS
+   Issue #74673 | .ease-spotlight-card component
+   ============================================================ */
+
+/* ---------- Register animatable custom properties ---------- */
+@property --x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+/* ---------- Base reset & fonts ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0f172a;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 1.5rem;
+  background: #080d16;
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #e2e8f0;
 }
 
-.container {
-    max-width: 1100px;
-    text-align: center;
+/* ---------- Page-level decoration ---------- */
+.page-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6366f1;
 }
 
-h1 {
-    color: #ffffff;
-    margin-bottom: 0.75rem;
+.page-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(135deg, #f8fafc 30%, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
 }
 
-.subtitle {
-    color: #cbd5e1;
-    margin-bottom: 2.5rem;
+.page-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  text-align: center;
+  max-width: 520px;
 }
 
+/* ---------- Grid ---------- */
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.5rem;
+  width: min(100%, 960px);
 }
 
-.spotlight-card {
-    position: relative;
-    overflow: hidden;
-    padding: 2rem;
-    border-radius: 18px;
-    background: #1e293b;
-    color: white;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.35s ease,
-                box-shadow 0.35s ease,
-                border-color 0.35s ease;
+/* ============================================================
+   .ease-spotlight-card  —  the core component
+   ============================================================ */
+
+/*
+ * 1. @property lets the browser understand the *type* of --x / --y
+ *    so it can interpolate them inside @keyframes.
+ * 2. ::before is a full-size overlay carrying the radial-gradient.
+ *    On hover it fades in and its custom-property position animates.
+ * 3. mix-blend-mode: overlay means bright areas of the gradient
+ *    brighten card content naturally, just like a real spotlight.
+ */
+.ease-spotlight-card {
+  --x: 50%;
+  --y: 50%;
+
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #0f172a;
+
+  /* Subtle inner glow at rest */
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 8px 32px rgba(0, 0, 0, 0.5);
+
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.spotlight-card::before {
-    content: "";
-    position: absolute;
-    inset: -50%;
-    background: radial-gradient(
-        circle,
-        rgba(255,255,255,0.22),
-        transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
+/* Spotlight overlay layer */
+.ease-spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    circle 220px at var(--x) var(--y),
+    rgba(255, 255, 255, 0.18),
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.spotlight-card:hover::before {
-    opacity: 1;
+/* Edge-glint border overlay (separate so it doesn't blend) */
+.ease-spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    circle 220px at var(--x) var(--y),
+    rgba(99, 102, 241, 0.35),
+    transparent 70%
+  );
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.spotlight-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255,255,255,0.25);
-    box-shadow:
-        0 20px 40px rgba(0,0,0,0.4),
-        0 0 30px rgba(255,255,255,0.08);
+/* ---- Hover state ---- */
+.ease-spotlight-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.25) inset,
+    0 24px 56px rgba(0, 0, 0, 0.6),
+    0 0 48px rgba(99, 102, 241, 0.1);
 }
 
-.spotlight-card h2 {
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
+.ease-spotlight-card:hover::before {
+  opacity: 1;
+  /* Sweep animation: smoothly lerps --x / --y around the card */
+  animation: ease-spotlight-sweep 5s ease-in-out infinite alternate;
 }
 
-.spotlight-card p {
-    color: #d1d5db;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
+.ease-spotlight-card:hover::after {
+  opacity: 1;
+  animation: ease-spotlight-sweep 5s ease-in-out infinite alternate;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
+/* ---- Spotlight sweep keyframes ---- */
+/*
+ * Because @property registers --x and --y as <percentage>,
+ * the browser can interpolate them between keyframe steps —
+ * producing a smooth orbiting-light illusion without JS.
+ */
+@keyframes ease-spotlight-sweep {
+  0% {
+    --x: 10%;
+    --y: 10%;
+  }
+  20% {
+    --x: 90%;
+    --y: 5%;
+  }
+  40% {
+    --x: 95%;
+    --y: 90%;
+  }
+  60% {
+    --x: 50%;
+    --y: 50%;
+  }
+  80% {
+    --x: 5%;
+    --y: 90%;
+  }
+  100% {
+    --x: 10%;
+    --y: 10%;
+  }
+}
 
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
+/* ---- Card content (must sit above ::before / ::after) ---- */
+.ease-spotlight-card .card-icon {
+  position: relative;
+  z-index: 1;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1.25rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.ease-spotlight-card h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+
+.ease-spotlight-card p {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #64748b;
+}
+
+/* ---------- Reduced-motion: disable animation, keep fade ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ease-spotlight-card {
+    transition: none;
+  }
+
+  .ease-spotlight-card::before,
+  .ease-spotlight-card::after {
+    animation: none !important;
+    /* Park spotlight in top-left corner — still visible but static */
+    --x: 20%;
+    --y: 20%;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
 }
