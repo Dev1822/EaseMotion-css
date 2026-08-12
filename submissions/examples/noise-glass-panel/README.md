@@ -1,13 +1,25 @@
 # Noise Grain Glassmorphism Panel
 
-A premium frosted glass component (`.ease-glass-panel`) featuring a subtle SVG-based noise/grain texture overlaid using the `::before` pseudo-element. 
+1. **What does this do?**  
+   Adds a frosted glass blur panel (`backdrop-filter: blur(12px)`) layered with an inline SVG grain noise texture overlay (`feTurbulence`) for tactile UI depth.
 
-## Features
-- Frosted glass effect using `backdrop-filter: blur(12px)`
-- SVG noise texture generated via inline `background-image` and `feTurbulence`
-- Soft overlay blend mode (`mix-blend-mode: overlay`) for a tactile UI feel
-- Subtle hover states that increase blur and border brightness
-- Pure CSS implementation with no external assets
+2. **How is it used?**  
+   Apply `.noise-glass-panel` (or `.noise-glass-panel-hover`, `.panel-glow`) to a container element:
 
-## Demo
-Open `demo.html` in your browser to see the component in action.
+   ```html
+   <div class="noise-glass-panel noise-glass-panel-hover panel-glow">
+     <div class="panel-header">
+       <h3 class="panel-title">Tactile Glass Card</h3>
+       <p class="panel-subtitle">Sub-heading</p>
+     </div>
+     <div class="panel-body">
+       <p>Frosted glass card content layered with SVG noise texture.</p>
+     </div>
+     <div class="panel-footer">
+       <button class="btn">Action</button>
+     </div>
+   </div>
+   ```
+
+3. **Why is it useful?**  
+   Standard flat glassmorphism cards can feel overdone in modern web design. Overlaying a subtle SVG noise grain texture using `mix-blend-mode: overlay` creates depth, tactile physical presence, and a high-end aesthetic seen on cutting-edge tools like Linear and Vercel, fitting EaseMotion CSS's human-readable, animation-first philosophy with zero dependencies.
