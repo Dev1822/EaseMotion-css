@@ -1,18 +1,123 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noise Grain Glassmorphism Panel</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <main class="shell">
-      <section class="ease-glass-panel" aria-label="Noise Grain Glassmorphism Panel demo">
-        <p class="eyebrow">EaseMotion CSS</p>
-        <h1>Premium Glass</h1>
-        <p>This panel uses CSS and an inline SVG filter to create a frosted glass effect layered with a subtle grain texture, giving the interface a tactile, high-end aesthetic.</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS-Only Noise Grain Glassmorphism Panel — EaseMotion CSS</title>
+  <meta name="description" content="A tactile, modern frosted glass card component with inline SVG noise grain filter and dynamic hover refraction built with pure CSS.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Demo CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Ambient Orbs for Glass Refraction Background -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="demo-container">
+
+    <!-- Header Section -->
+    <header class="demo-header">
+      <span class="badge">EaseMotion CSS Component #77739</span>
+      <h1 class="demo-title">Noise Grain Glassmorphism Panel</h1>
+      <p class="demo-subtitle">
+        Elevate standard frosted glass UI with a tactile inline SVG noise grain filter, dynamic border refraction, and smooth hover blur transitions.
+      </p>
+    </header>
+
+    <!-- Showcase Grid -->
+    <main class="showcase-grid">
+
+      <!-- Card 1: Default Glass Panel with Noise -->
+      <article class="ease-glass-panel ease-glass-panel-glow">
+        <div class="panel-icon" aria-hidden="true">✨</div>
+        <h2 class="panel-title">Standard Noise Glass</h2>
+        <p class="panel-desc">
+          Features a frosted <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">blur(12px)</code> backdrop layered with an inline SVG <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">feTurbulence</code> grain texture overlay.
+        </p>
+        <div class="panel-footer">
+          <span class="tag-label">Default Panel</span>
+          <button type="button" class="btn-glass">Explore Details</button>
+        </div>
+      </article>
+
+      <!-- Card 2: Dark Glass Panel Variant -->
+      <article class="ease-glass-panel ease-glass-panel-dark ease-glass-grain-intense">
+        <div class="panel-icon" aria-hidden="true">🌙</div>
+        <h2 class="panel-title">Dark Noise Glass</h2>
+        <p class="panel-desc">
+          Optimized for dark interfaces using semi-transparent dark slate backdrops, heightened grain opacity, and sharp edge highlights.
+        </p>
+        <div class="panel-footer">
+          <span class="tag-label">Dark Variant</span>
+          <button type="button" class="btn-glass">View Config</button>
+        </div>
+      </article>
+
+      <!-- Card 3: Light Glass Panel Variant -->
+      <article class="ease-glass-panel ease-glass-panel-light ease-glass-grain-subtle">
+        <div class="panel-icon" aria-hidden="true">☀️</div>
+        <h2 class="panel-title">Light Noise Glass</h2>
+        <p class="panel-desc">
+          Crisp, bright aesthetic designed for daylight or high-contrast UI cards with subtle 4% noise texture overlay.
+        </p>
+        <div class="panel-footer">
+          <span class="tag-label">Light Variant</span>
+          <button type="button" class="btn-glass" style="background: rgba(15,23,42,0.1); color: #0f172a; border-color: rgba(15,23,42,0.2);">Learn More</button>
+        </div>
+      </article>
+
+      <!-- Detailed Technical Showcase Panel -->
+      <section class="ease-glass-panel ease-glass-panel-dark details-panel">
+        <h2 class="panel-title" style="font-size: 1.5rem;">Why SVG Noise Grain Glassmorphism?</h2>
+        <p class="panel-desc">
+          Standard CSS glassmorphism cards can feel flat and repetitive in modern design systems. Injecting SVG fractal noise directly into a pseudo-element with <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">mix-blend-mode: overlay</code> introduces physical depth, tactile quality, and high-end visual realism.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">1</div>
+            <div class="feature-text">
+              <h4>Zero External Assets</h4>
+              <p>Inline Data URI SVG noise filter ensures instant loading without external image requests.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">2</div>
+            <div class="feature-text">
+              <h4>Interactive Refraction</h4>
+              <p>Hover triggers subtle backdrop blur elevation (12px &rarr; 18px) and border light brightness.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">3</div>
+            <div class="feature-text">
+              <h4>Fully Customisable</h4>
+              <p>Control backdrop blur, grain opacity, border opacity, and background tint via CSS custom properties.</p>
+            </div>
+          </div>
+        </div>
       </section>
+
     </main>
-  </body>
+
+    <!-- Footer -->
+    <footer class="demo-footer">
+      <p>EaseMotion CSS — Contributed for Issue #77739 by <a href="https://github.com/Dev1822" target="_blank" rel="noopener noreferrer">Dev1822</a></p>
+    </footer>
+
+  </div>
+
+</body>
 </html>
