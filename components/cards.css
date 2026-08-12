@@ -1,3 +1,15 @@
+@property --x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
 @layer easemotion-components {
 /* ============================================================
    EaseMotion CSS — cards.css
@@ -304,6 +316,66 @@
   letter-spacing: 0.08em;
 }
 
+/* ── Spotlight Hover Card (CSS-only) ─────────────────────── */
+
+.ease-spotlight-card {
+  --x: 50%;
+  --y: 50%;
+  --ease-spotlight-color: rgba(255, 255, 255, 0.22);
+  --ease-spotlight-size: 300px;
+
+  position: relative;
+  overflow: hidden;
+  padding: var(--ease-space-6, 1.5rem);
+  border-radius: var(--ease-radius-lg, 1rem);
+  background-color: var(--ease-color-surface-dark, #0f172a);
+  color: var(--ease-color-text-dark, #f8fafc);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    transform var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    box-shadow var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    border-color var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    --x var(--ease-speed-medium, 300ms) ease,
+    --y var(--ease-speed-medium, 300ms) ease;
+}
+
+.ease-spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle var(--ease-spotlight-size) at var(--x) var(--y),
+    var(--ease-spotlight-color) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ease-spotlight-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.08);
+    animation: ease-spotlight-sweep 4s ease-in-out infinite alternate;
+  }
+
+  .ease-spotlight-card:hover::before {
+    opacity: 1;
+  }
+}
+
+.ease-spotlight-card:focus-visible {
+  outline: 2px solid var(--ease-color-primary, #6c63ff);
+  outline-offset: 3px;
+}
+
 /* ── Reduced Motion: Respect user preference ───────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ease-card-hover {
@@ -318,6 +390,12 @@
   .ease-card-neumorphic {
     transition: none !important;
     transform: none !important;
+  }
+
+  .ease-spotlight-card {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 
@@ -352,3 +430,23 @@
   }
 }
 }
+
+@keyframes ease-spotlight-sweep {
+  0% {
+    --x: 20%;
+    --y: 20%;
+  }
+  33% {
+    --x: 80%;
+    --y: 35%;
+  }
+  66% {
+    --x: 70%;
+    --y: 80%;
+  }
+  100% {
+    --x: 30%;
+    --y: 70%;
+  }
+}
+

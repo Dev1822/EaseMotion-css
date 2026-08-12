@@ -1,3 +1,17 @@
+@import "../../components/cards.css";
+
+@property --x {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+}
+
+@property --y {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,81 +24,137 @@ body {
     justify-content: center;
     align-items: center;
     background: #0f172a;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     padding: 2rem;
+    color: #f8fafc;
 }
 
 .container {
     max-width: 1100px;
     text-align: center;
+    width: 100%;
 }
 
 h1 {
     color: #ffffff;
+    font-size: 2.25rem;
     margin-bottom: 0.75rem;
+    letter-spacing: -0.025em;
 }
 
 .subtitle {
     color: #cbd5e1;
     margin-bottom: 2.5rem;
+    font-size: 1.1rem;
 }
 
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
+/* Framework class override / custom tuning */
+.ease-spotlight-card,
 .spotlight-card {
+    --x: 50%;
+    --y: 50%;
+    --ease-spotlight-color: rgba(255, 255, 255, 0.25);
+    --ease-spotlight-size: 280px;
+
     position: relative;
     overflow: hidden;
     padding: 2rem;
     border-radius: 18px;
     background: #1e293b;
     color: white;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.35s ease,
-                box-shadow 0.35s ease,
-                border-color 0.35s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease,
+        --x 0.4s ease,
+        --y 0.4s ease;
 }
 
+.ease-spotlight-card::before,
 .spotlight-card::before {
     content: "";
     position: absolute;
-    inset: -50%;
+    inset: 0;
+    border-radius: inherit;
     background: radial-gradient(
-        circle,
-        rgba(255,255,255,0.22),
-        transparent 60%
+        circle var(--ease-spotlight-size) at var(--x) var(--y),
+        var(--ease-spotlight-color) 0%,
+        rgba(255, 255, 255, 0.05) 40%,
+        transparent 80%
     );
+    mix-blend-mode: overlay;
     opacity: 0;
     transition: opacity 0.35s ease;
     pointer-events: none;
 }
 
+.ease-spotlight-card:hover::before,
 .spotlight-card:hover::before {
     opacity: 1;
 }
 
+.ease-spotlight-card:hover,
 .spotlight-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255,255,255,0.25);
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow:
-        0 20px 40px rgba(0,0,0,0.4),
-        0 0 30px rgba(255,255,255,0.08);
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 255, 255, 0.08);
+    animation: ease-spotlight-sweep 4s ease-in-out infinite alternate;
 }
 
+.ease-spotlight-card h2,
 .spotlight-card h2 {
-    margin-bottom: 1rem;
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
     position: relative;
     z-index: 1;
+    color: #ffffff;
 }
 
+.ease-spotlight-card p,
 .spotlight-card p {
-    color: #d1d5db;
+    color: #94a3b8;
     line-height: 1.6;
     position: relative;
     z-index: 1;
+    font-size: 0.95rem;
+}
+
+@keyframes ease-spotlight-sweep {
+    0% {
+        --x: 25%;
+        --y: 20%;
+    }
+    33% {
+        --x: 75%;
+        --y: 35%;
+    }
+    66% {
+        --x: 65%;
+        --y: 80%;
+    }
+    100% {
+        --x: 30%;
+        --y: 70%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ease-spotlight-card,
+    .spotlight-card {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
 }
 
 @media (max-width: 768px) {
