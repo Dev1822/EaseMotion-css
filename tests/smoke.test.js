@@ -46,8 +46,9 @@ const modals = readFileSync(resolve(componentsDir, 'modals.css'), 'utf8');
     const breadcrumb = readFileSync(resolve(componentsDir, 'breadcrumb.css'), 'utf8');
     const avatar = readFileSync(resolve(componentsDir, 'avatar.css'), 'utf8');
     const announceBar = readFileSync(resolve(componentsDir, 'announce-bar.css'), 'utf8');
+    const headerMorph = readFileSync(resolve(componentsDir, 'header-morph.css'), 'utf8');
     
-    css = variables + base + animations + utilities + buttons + cards + chip + footer + masonry + navbar + scrollProgress + sidebar + tabs + badges + loaders + tooltips + modals + commandPalette + viewTransitions + toast + tag + skeleton + scrollGallery + readMore + progress + passwordStrength + pagination + kbd + fab + connectionStatus + compareTable + btnMagnetic + breadcrumb + avatar + announceBar;
+    css = variables + base + animations + utilities + buttons + cards + chip + footer + masonry + navbar + scrollProgress + sidebar + tabs + badges + loaders + tooltips + modals + commandPalette + viewTransitions + toast + tag + skeleton + scrollGallery + readMore + progress + passwordStrength + pagination + kbd + fab + connectionStatus + compareTable + btnMagnetic + breadcrumb + avatar + announceBar + headerMorph;
     dom = new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>');
     document = dom.window.document;
     
@@ -100,6 +101,7 @@ const modals = readFileSync(resolve(componentsDir, 'modals.css'), 'utf8');
     expect(selectors).toContain('.ease-footer');
     expect(selectors).toContain('.ease-masonry');
     expect(selectors).toContain('.ease-navbar-glass');
+    expect(selectors).toContain('.ease-header-morph');
     expect(selectors).toContain('.ease-scroll-progress');
     expect(selectors).toContain('.ease-sidebar');
   });
