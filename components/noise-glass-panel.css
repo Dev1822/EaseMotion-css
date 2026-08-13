@@ -1,0 +1,119 @@
+/* ============================================================
+   EaseMotion CSS — Noise Grain Glassmorphism Panel Component
+   ============================================================ */
+
+:root {
+  --ease-glass-bg: rgba(255, 255, 255, 0.15);
+  --ease-glass-blur: 12px;
+  --ease-glass-border: rgba(255, 255, 255, 0.24);
+  --ease-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  --ease-glass-radius: 16px;
+  --ease-glass-noise-opacity: 0.08;
+  --ease-glass-noise-blend: overlay;
+  --ease-glass-noise-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ── Dark Mode Auto / Custom Attributes ──────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ease-glass-bg: rgba(15, 23, 42, 0.55);
+    --ease-glass-border: rgba(255, 255, 255, 0.12);
+    --ease-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  }
+}
+
+[data-theme="dark"] {
+  --ease-glass-bg: rgba(15, 23, 42, 0.55);
+  --ease-glass-border: rgba(255, 255, 255, 0.12);
+  --ease-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] {
+  --ease-glass-bg: rgba(255, 255, 255, 0.15);
+  --ease-glass-border: rgba(255, 255, 255, 0.24);
+  --ease-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+}
+
+/* ── Base Glass Panel Component ──────────────────────────────── */
+.ease-glass-panel {
+  position: relative;
+  background: var(--ease-glass-bg);
+  backdrop-filter: blur(var(--ease-glass-blur));
+  -webkit-backdrop-filter: blur(var(--ease-glass-blur));
+  border: 1px solid var(--ease-glass-border);
+  border-radius: var(--ease-glass-radius);
+  box-shadow: var(--ease-glass-shadow);
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Ensure contents sit above noise texture */
+.ease-glass-panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Inline SVG Noise Texture Overlay */
+.ease-glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--ease-glass-noise-svg);
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  opacity: var(--ease-glass-noise-opacity);
+  mix-blend-mode: var(--ease-glass-noise-blend);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* ── Interactive & Hover States ─────────────────────────────── */
+.ease-glass-panel-interactive {
+  cursor: pointer;
+}
+
+.ease-glass-panel-interactive:hover,
+.ease-glass-panel:hover {
+  --ease-glass-blur: 16px;
+  --ease-glass-border: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.22), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.ease-glass-panel-interactive:hover {
+  transform: translateY(-3px);
+}
+
+/* ── Component Variants ─────────────────────────────────────── */
+.ease-glass-panel-dark {
+  --ease-glass-bg: rgba(15, 23, 42, 0.65);
+  --ease-glass-border: rgba(255, 255, 255, 0.12);
+  --ease-glass-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+.ease-glass-panel-light {
+  --ease-glass-bg: rgba(255, 255, 255, 0.25);
+  --ease-glass-border: rgba(255, 255, 255, 0.35);
+  --ease-glass-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+.ease-glass-panel-glow {
+  box-shadow: 0 0 30px 0 rgba(99, 102, 241, 0.25), var(--ease-glass-shadow);
+}
+
+.ease-glass-panel-glow:hover {
+  box-shadow: 0 0 45px 0 rgba(99, 102, 241, 0.4), 0 12px 40px 0 rgba(0, 0, 0, 0.22), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Additional Grain Opacity Utility Modifiers */
+.ease-glass-noise-subtle::before {
+  opacity: 0.04;
+}
+
+.ease-glass-noise-heavy::before {
+  opacity: 0.15;
+}

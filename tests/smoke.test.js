@@ -46,8 +46,9 @@ const modals = readFileSync(resolve(componentsDir, 'modals.css'), 'utf8');
     const breadcrumb = readFileSync(resolve(componentsDir, 'breadcrumb.css'), 'utf8');
     const avatar = readFileSync(resolve(componentsDir, 'avatar.css'), 'utf8');
     const announceBar = readFileSync(resolve(componentsDir, 'announce-bar.css'), 'utf8');
+    const noiseGlassPanel = readFileSync(resolve(componentsDir, 'noise-glass-panel.css'), 'utf8');
     
-    css = variables + base + animations + utilities + buttons + cards + chip + footer + masonry + navbar + scrollProgress + sidebar + tabs + badges + loaders + tooltips + modals + commandPalette + viewTransitions + toast + tag + skeleton + scrollGallery + readMore + progress + passwordStrength + pagination + kbd + fab + connectionStatus + compareTable + btnMagnetic + breadcrumb + avatar + announceBar;
+    css = variables + base + animations + utilities + buttons + cards + chip + footer + masonry + navbar + scrollProgress + sidebar + tabs + badges + loaders + tooltips + modals + commandPalette + viewTransitions + toast + tag + skeleton + scrollGallery + readMore + progress + passwordStrength + pagination + kbd + fab + connectionStatus + compareTable + btnMagnetic + breadcrumb + avatar + announceBar + noiseGlassPanel;
     dom = new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>');
     document = dom.window.document;
     
@@ -102,6 +103,7 @@ const modals = readFileSync(resolve(componentsDir, 'modals.css'), 'utf8');
     expect(selectors).toContain('.ease-navbar-glass');
     expect(selectors).toContain('.ease-scroll-progress');
     expect(selectors).toContain('.ease-sidebar');
+    expect(selectors).toContain('.ease-glass-panel');
   });
 
   it('should expose scroll-progress theme variants', () => {
