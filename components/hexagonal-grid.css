@@ -1,0 +1,204 @@
+/* ============================================================
+   EaseMotion CSS — Hexagonal Grid Component
+   Pure CSS Honeycomb Grid with Clip-Path & Reactive Neighbor Highlighting
+   ============================================================ */
+
+@layer easemotion-components {
+  /* ── Hexagonal Grid Container ────────────────────────────── */
+  .ease-hex-grid {
+    --ease-hex-size: 130px;
+    --ease-hex-gap: 12px;
+    --ease-hex-glow-color: rgba(99, 102, 241, 0.7);
+    --ease-hex-accent-color: #6366f1;
+    --ease-hex-bg: var(--ease-color-surface, #1e293b);
+    --ease-hex-border: rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--ease-hex-gap);
+    padding: 2rem 1rem;
+    position: relative;
+    perspective: 1000px;
+  }
+
+  /* Honeycomb Row Layout Wrapper */
+  .ease-hex-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--ease-hex-gap);
+    width: 100%;
+    margin-top: calc(var(--ease-hex-size) * -0.22);
+  }
+
+  .ease-hex-row:first-child {
+    margin-top: 0;
+  }
+
+  .ease-hex-row:nth-child(even) {
+    transform: translateX(calc(var(--ease-hex-size) / 2 + var(--ease-hex-gap) / 2));
+  }
+
+  /* ── Hexagonal Item Base ──────────────────────────────────── */
+  .ease-hex-item {
+    position: relative;
+    width: var(--ease-hex-size);
+    height: calc(var(--ease-hex-size) * 1.1547);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: var(--ease-hex-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--ease-speed-medium, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity var(--ease-speed-medium, 0.3s) ease,
+                filter var(--ease-speed-medium, 0.3s) ease,
+                background-color var(--ease-speed-fast, 0.2s) ease;
+    z-index: 1;
+    text-decoration: none;
+    color: inherit;
+    user-select: none;
+  }
+
+  /* Inner Hexagon Container for Border Simulation & Content Padding */
+  .ease-hex-content {
+    position: absolute;
+    inset: 2px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), var(--ease-hex-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    box-sizing: border-box;
+    transition: background var(--ease-speed-medium, 0.3s) ease;
+  }
+
+  .ease-hex-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+    transition: transform var(--ease-speed-medium, 0.3s) ease;
+  }
+
+  .ease-hex-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .ease-hex-subtitle {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    margin-top: 0.2rem;
+  }
+
+  /* ── Hovered Hexagon State ──────────────────────────────── */
+  .ease-hex-item:hover {
+    transform: scale(1.22) translateZ(10px);
+    z-index: 25;
+    opacity: 1;
+    background: var(--ease-hex-accent-color);
+    filter: drop-shadow(0 0 18px var(--ease-hex-glow-color));
+  }
+
+  .ease-hex-item:hover .ease-hex-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%), var(--ease-hex-bg);
+  }
+
+  .ease-hex-item:hover .ease-hex-icon {
+    transform: scale(1.15);
+  }
+
+  /* ── Reactive Neighbor Highlighting with CSS :has() ──────── */
+
+  /* 1. Dim non-hovered cells when grid has active hover */
+  .ease-hex-grid:has(.ease-hex-item:hover) .ease-hex-item:not(:hover) {
+    opacity: 0.45;
+    transform: scale(0.92);
+    filter: grayscale(0.2);
+  }
+
+  /* 2. Immediate Preceding Sibling Neighbor */
+  .ease-hex-item:has(+ .ease-hex-item:hover) {
+    opacity: 0.85 !important;
+    transform: scale(1.06) !important;
+    z-index: 15 !important;
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.35)) !important;
+    background: linear-gradient(135deg, var(--ease-hex-accent-color), var(--ease-hex-bg)) !important;
+  }
+
+  /* 3. Immediate Next Sibling Neighbor */
+  .ease-hex-item:hover + .ease-hex-item {
+    opacity: 0.85 !important;
+    transform: scale(1.06) !important;
+    z-index: 15 !important;
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.35)) !important;
+    background: linear-gradient(135deg, var(--ease-hex-accent-color), var(--ease-hex-bg)) !important;
+  }
+
+  /* ── Variant Modifiers ───────────────────────────────────── */
+
+  /* Cyberpunk Glow Variant */
+  .ease-hex-grid-cyber {
+    --ease-hex-accent-color: #06b6d4;
+    --ease-hex-glow-color: rgba(6, 182, 212, 0.8);
+    --ease-hex-bg: #0f172a;
+  }
+
+  .ease-hex-grid-cyber .ease-hex-item:hover {
+    filter: drop-shadow(0 0 20px #06b6d4) drop-shadow(0 0 35px #ec4899);
+  }
+
+  /* Gold / Gaming Skill Tree Variant */
+  .ease-hex-grid-gold {
+    --ease-hex-accent-color: #f59e0b;
+    --ease-hex-glow-color: rgba(245, 158, 11, 0.8);
+    --ease-hex-bg: #1c1917;
+  }
+
+  .ease-hex-grid-gold .ease-hex-item:hover {
+    filter: drop-shadow(0 0 22px rgba(245, 158, 11, 0.9));
+  }
+
+  /* Emerald / Health Variant */
+  .ease-hex-grid-emerald {
+    --ease-hex-accent-color: #10b981;
+    --ease-hex-glow-color: rgba(16, 185, 129, 0.8);
+    --ease-hex-bg: #064e3b;
+  }
+
+  /* ── Responsive Adjustments ──────────────────────────────── */
+  @media (max-width: 768px) {
+    .ease-hex-grid {
+      --ease-hex-size: 100px;
+      --ease-hex-gap: 8px;
+    }
+
+    .ease-hex-icon {
+      font-size: 1.35rem;
+    }
+
+    .ease-hex-title {
+      font-size: 0.75rem;
+    }
+
+    .ease-hex-subtitle {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ease-hex-grid {
+      --ease-hex-size: 85px;
+      --ease-hex-gap: 6px;
+    }
+
+    .ease-hex-title {
+      font-size: 0.7rem;
+    }
+  }
+}
