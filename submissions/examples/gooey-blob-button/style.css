@@ -1,0 +1,150 @@
+/* Showcase layout styles for Gooey Blob Button Demo */
+
+:root {
+  --bg-color: #0b1120;
+  --surface-color: #141e33;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-purple: #6c63ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3rem 1.5rem;
+  line-height: 1.6;
+}
+
+.showcase-header {
+  text-align: center;
+  max-width: 680px;
+  margin-bottom: 3.5rem;
+}
+
+.showcase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.showcase-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.showcase-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1080px;
+  margin-bottom: 4rem;
+}
+
+.showcase-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 1.25rem;
+  padding: 2.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.showcase-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.card-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.card-demo-area {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.info-section {
+  width: 100%;
+  max-width: 1080px;
+  background-color: rgba(20, 30, 51, 0.6);
+  border: 1px solid var(--surface-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.info-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f1f5f9;
+}
+
+.info-code {
+  background-color: #070b14;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  color: #e2e8f0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .showcase-title {
+    font-size: 1.85rem;
+  }
+}
