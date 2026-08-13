@@ -1,0 +1,224 @@
+/* ============================================================
+   EaseMotion CSS — Holographic Card Demo Page Styles
+   ============================================================ */
+
+:root {
+  --bg-dark: #090d16;
+  --surface-dark: #111827;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent-purple: #a855f7;
+  --accent-blue: #38bdf8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Header */
+.demo-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 4rem auto;
+}
+
+.demo-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 9999px;
+  color: #c084fc;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+.demo-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.demo-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem 2rem;
+  justify-items: center;
+  margin-bottom: 5rem;
+}
+
+.card-showcase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-label {
+  margin-top: 1.5rem;
+  text-align: center;
+  max-width: 280px;
+}
+
+.card-label h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem 0;
+  color: #f8fafc;
+}
+
+.card-label p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.card-label code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: #38bdf8;
+  font-size: 0.8rem;
+}
+
+/* Inner Card Typography Customization */
+.hp-stat,
+.pass-id {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.card-stats,
+.vip-perks {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  margin-top: 0.4rem;
+}
+
+.gold-badge {
+  background: rgba(234, 179, 8, 0.25);
+  border-color: rgba(253, 224, 71, 0.6);
+  color: #fef08a;
+}
+
+.cosmic-badge {
+  background: rgba(236, 72, 153, 0.25);
+  border-color: rgba(244, 114, 182, 0.6);
+  color: #fbcfe8;
+}
+
+.silver-badge {
+  background: rgba(148, 163, 184, 0.25);
+  border-color: rgba(226, 232, 240, 0.6);
+  color: #f8fafc;
+}
+
+/* Technical Highlights Section */
+.tech-section {
+  background: var(--surface-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  margin-bottom: 4rem;
+}
+
+.tech-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: 1.75rem;
+  margin: 0 0 2.5rem 0;
+  color: #f8fafc;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.tech-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.tech-card h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem 0;
+  color: #e2e8f0;
+}
+
+.tech-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tech-card code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  color: #38bdf8;
+  font-size: 0.82rem;
+}
+
+/* Footer */
+.demo-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 2rem;
+}
